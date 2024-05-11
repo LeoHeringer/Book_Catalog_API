@@ -9,14 +9,15 @@ from .models import Book
 
 @api_view(['POST'])
 def create_book(request):
-    name = request.data.get('name')
-    author = request.data.get('author')
+    book_data = request.data
     
-        
-    if Book.objects.filter(name=name, author=author).exists():
+    existing_book = Book.objects.filter(name=book_data.get('name'), author=book_data.get('author')).exists()
+    
+    if existing_book:
         return Response({"message": "Book already exists"}, status=status.HTTP_400_BAD_REQUEST)
     
-    serializer = BookSerializer(data=request.data)
+    serializer = BookSerializer(data=book_data)
+    
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -27,12 +28,36 @@ def create_book(request):
 def get_book(request):
 
     book_name = request.query_params.get('name')
-
     book = Book.objects.filter(name=book_name)
     
-    if not book.exists():
-        return Response({"message":"book does not exist"}, status=status.HTTP_404_NOT_FOUND)
+    if book:
+        serializer = BookSerializer(book.first())
+        return Response(serializer.data, status=status.HTTP_200_OK)
     
-    serializer = BookSerializer(book.first())
+    return Response({"message": "Book not found"}, status=status.HTTP_404_NOT_FOUND)
 
-    return Response(serializer.data, status=status.HTTP_200_OK)
+@api_view(['PUT'])
+def update_book(request):
+    book = request.query_params.get('name')
+    update_book = Book.objects.filter(name=book).first()
+    
+    if not update_book:
+        return Response({"message":"Book not found"}, status=status.HTTP_404_NOT_FOUND)
+    
+    serializer = BookSerializer(update_book, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({"message": "Updated successfully"}, status=status.HTTP_200_OK)
+    
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+@api_view(['DELETE'])
+def delete_book(request):
+    book_id = request.query_params.get('id')
+    delete_book = Book.objects.filter(id=book_id).first()
+    
+    if delete_book:
+        delete_book.delete()
+        return Response({"message": "Book successfully deleted"}, status=status.HTTP_200_OK)
+    else:
+        return Response({"message": "Book not found"}, status=status.HTTP_400_BAD_REQUEST)
