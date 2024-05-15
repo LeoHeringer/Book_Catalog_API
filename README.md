@@ -49,7 +49,7 @@ To request an authorization token, you can use the Django admin interface to log
 3. After successfully logging in, you can obtain the authorization token by sending a POST request to the API's login endpoint with your credentials. For example:
 
 ```json
-POST /api/login/
+POST /api/token/
 {
   "username": "your_username",
   "password": "your_password"
