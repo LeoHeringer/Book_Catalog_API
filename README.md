@@ -37,10 +37,16 @@ The API supports the following HTTP methods:
 - `DELETE`: Delete records.
 
 ## Authorization Token 🔒
+
 To access the protected endpoints of the Book Catalog API, you need to include an authorization token in the header of your HTTP requests. You can obtain an authorization token by making a login request to the API.
 
-Requesting Authorization Token
-To request an authorization token, send a POST request to the API's login endpoint with your credentials. For example:
+### Requesting Authorization Token
+
+To request an authorization token, you can use the Django admin interface to log in as a super user admin. Follow these steps:
+
+1. Navigate to the Django admin login page: `http://yourdomain.com/admin/`.
+2. Log in using the credentials of the super user admin.
+3. After successfully logging in, you can obtain the authorization token by sending a POST request to the API's login endpoint with your credentials. For example:
 
 ```json
 POST /api/login/
@@ -53,7 +59,6 @@ If the credentials are correct, you will receive an authorization token in the r
 
 ## Using Authorization Token
 After receiving the authorization token, include it in the Authorization header of your requests to the protected endpoints of the API. For example:
-
 ```json
 GET /books/
 Authorization: Bearer <your_authorization_token>
