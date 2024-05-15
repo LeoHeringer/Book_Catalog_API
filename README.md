@@ -1,6 +1,6 @@
 <h1 align="center">📚 Book Catalog API 📚</h1>
 
-This is a book catalog API developed with Django Rest Framework, aimed at managing book information such as title, author, release year, and edition number.
+<p align="center">This is a book catalog API developed with Django Rest Framework, aimed at managing book information such as title, author, release year, and edition number.</p>
 
 ## Data Models 📋
 
