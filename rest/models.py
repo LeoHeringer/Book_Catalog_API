@@ -5,7 +5,7 @@ class Book(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200, null=False, blank=False)
     author = models.CharField(max_length=200, null=False, blank=False)
-    launch = models.IntegerField(null=False, blank=False)
+    launch = models.DateField()
     edition = models.IntegerField(null=False, blank=False)
     book_type = models.CharField(max_length=200, null=False, blank=False)
     gender = models.CharField(max_length=200, null=False, blank=False)
