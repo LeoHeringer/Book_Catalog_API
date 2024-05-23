@@ -7,13 +7,13 @@
 - `Book`:
   - `id` (auto-increment): Unique identifier for the book.
   - `name` (string): The title of the book.
-  - `author_name` (string): The author's name.
-  - `release_year` (integer): The year the book was first released.
-  - `edition_number` (integer): The edition number of the book.
-  - `type` (string): The category of the book (novel, manga, comic, etc.).
-  - `genre` (string): The genre of the book.
+  - `author` (string): The author's name.
+  - `launch` (integer): The year the book was first released.
+  - `edition` (integer): The edition number of the book.
+  - `book_type` (string): The category of the book (novel, manga, comic, etc.).
+  - `gender` (string): The genre of the book.
   - `publisher` (string): The publisher's name.
-  - `edition_year` (integer): The year of the book's edition release.
+  - `year_edition` (integer): The year of the book's edition release.
   - `edition_number` (integer): The edition number.
 
 ## API Usage 🚀
