@@ -12,3 +12,4 @@ class Book(models.Model):
     publisher = models.CharField(max_length=200, null=False, blank=False)
     year_edition = models.IntegerField(null=True, blank=True)
     edition_number = models.IntegerField(null=False, blank=False)
+    synopsis = models.TextField(null=True, blank=True)
